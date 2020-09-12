@@ -60,33 +60,40 @@ def view_rule():
 
 
 
-@rules_blueprint.route('/run_aggregation')
+@rules_blueprint.route('/run_aggregation',methods=['GET', 'POST'])
 def run_agg():
-    factor_dict = {}
-    rules_cp = db.session.query(ruleEngine.factor_name,ruleEngine.tolerance,ruleEngine.depth).filter_by(rule_name='Internal Counterparty',inc='true').all()
-    for item_val in rules_cp:
-        factor_dict[item_val[0]] = [str(item_val[1]), str(item_val[2])]
+    rule_engine_list = []
+    for value in db.session.query(ruleEngine.rule_name).distinct():
+        rule_engine_list.append(value[0])
 
-    related_ent_list = related_entities(factor_dict)
-    consol_df,sa_df = exposure_aggregation(related_ent_list)
-    rel_ent_display = list(related_ent_list.items())
-    # Generating consolidated graph
-    title ="Consolidated exposure($)"
-    filename = "Cpty_consol.png"
-    plot_graph(consol_df, title, filename)
+    if request.method == 'POST':
+        selected_rule = request.form['rule_value']
 
-    # Generating standalone exposure
-    title = "Standalone exposure($)"
-    filename = "Cpty_sa.png"
-    plot_graph(sa_df, title, filename)
+        factor_dict = {}
+        rules_cp = db.session.query(ruleEngine.factor_name,ruleEngine.tolerance,ruleEngine.depth).filter_by(rule_name=selected_rule,inc='true').all()
+        for item_val in rules_cp:
+            factor_dict[item_val[0]] = [str(item_val[1]), str(item_val[2])]
 
-    if not rules_cp:
-        flash('No results found!')
-        return redirect('/')
-    else:
-        # display results
-        return render_template('agg_view.html', consol_url='/static/images/Cpty_consol.png' ,sa_url='/static/images/Cpty_sa.png',rel_entity=rel_ent_display )
+        related_ent_list = related_entities(factor_dict)
+        consol_df,sa_df = exposure_aggregation(related_ent_list)
+        rel_ent_display = list(related_ent_list.items())
+        # Generating consolidated graph
+        title ="Consolidated exposure($)"
+        filename = "Cpty_consol.png"
+        plot_graph(consol_df, title, filename)
 
+        # Generating standalone exposure
+        title = "Standalone exposure($)"
+        filename = "Cpty_sa.png"
+        plot_graph(sa_df, title, filename)
+
+        if not rules_cp:
+            flash('No results found!')
+            return redirect('/')
+        else:
+            # display results
+            return render_template('agg_view.html', consol_url='/static/images/Cpty_consol.png' ,sa_url='/static/images/Cpty_sa.png',rel_entity=rel_ent_display)
+    return render_template('rule_select.html', rule_engine_list=rule_engine_list)
 
 
 @rules_blueprint.route('/modify/<int:id>', methods=['GET', 'POST'])
