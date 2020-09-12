@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {# head #}
+    {% block head %}
+        <head>
+            <title> Counterparty Exposure consolidation </title>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        </head>
+    {% endblock head %}
+
+    {# body #}
+    {% block body %}
+    <body>
+    <div class="wrapper">
+        {# navigation bar #}
+        {% block navbar %}
+        <nav class="navbar" style="background-color: #0033a0;">
+            <div class="container">
+                <a class="navbar-brand color-me" href="{{ url_for('index') }}" >Counterparty Exposure consolidation</a>
+
+
+                <ul class="nav navbar-nav pull-right nav-list">
+                    <li><a href="{{ url_for('index') }}" class="color-me"> Home </a></li>
+                    <li><a href="{{ url_for('rules_engine.add_rule')}}" class="color-me"> Add Rules Engine </a></li>
+                    <li><a href="{{ url_for('rules_engine.view_rule')}}" class="color-me"> View/Modify Rules </a></li>
+                    <li><a href="{{ url_for('rules_engine.run_agg')}}" class="color-me"> Run Aggregation </a></li>
+                </ul>
+            </div>
+        </nav>
+        {% endblock navbar %}
+
+
+
+
+        {# empty block for custom content #}
+        {% block content %} {% endblock content %}
+
+    </div>
+    </body>
+    {% endblock body %}
+</html>

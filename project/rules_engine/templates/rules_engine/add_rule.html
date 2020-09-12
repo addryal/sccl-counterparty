@@ -1,0 +1,72 @@
+
+
+{% extends "base.html" %}
+
+ {% block content %}
+    <title>Add Rule</title>
+    <form method=post enctype=multipart/form-data>
+        <div class="container" style="width:60%" align="left" >
+            <h3>Factors </h3>
+            <p>{{ form.rule_class.label }} {{ form.rule_class() }} </p>
+          <table class="table">
+              <thead>
+              <th>Factor</th>
+              <th>Include?</th>
+              <th>Tolerance</th>
+              <th>Depth</th>
+              </thead>
+
+            <tbody>
+              <tr>
+                  <td>Voting Share</td>
+                  <td>{{ form.vote_include(value='Y') }} </td>
+                  <td> {{ form.vote_tolerance() }} </td>
+                  <td> {{ form.vote_depth() }}</td>
+              </tr>
+              <tr>
+                  <td>Equity Holding</td>
+                  <td>{{ form.equity_include(value='Y') }} </td>
+                  <td> {{ form.equity_tolerance() }} </td>
+                  <td> {{ form.equity_depth() }}</td>
+
+              </tr>
+              <tr>
+                  <td>Revenue Dependence</td>
+                  <td>{{  form.revenue_include(value='Y') }} </td>
+                  <td> {{ form.revenue_tolerance() }} </td>
+                  <td> {{ form.revenue_depth() }}</td>
+              </tr>
+              <tr>
+                  <td>Expenditure Dependence</td>
+                  <td>{{  form.exp_include(value='Y') }} </td>
+                  <td> {{ form.exp_tolerance() }} </td>
+                  <td> {{ form.exp_depth() }}</td>
+
+              </tr>
+              <tr>
+                  <td>Production Dependence</td>
+                  <td>{{  form.prod_include(value='Y') }} </td>
+                  <td> {{ form.prod_tolerance() }} </td>
+                  <td> {{ form.prod_depth() }}</td>
+              </tr>
+              <tr>
+                  <td>Distress Contagion</td>
+                  <td>{{  form.distress_include(value='Y') }} </td>
+              </tr>
+              <tr>
+                  <td>Credit Guarantee</td>
+                  <td>{{  form.credit_include(value='Y') }} </td>
+              </tr>
+              <tr>
+                  <td>Significant Influence</td>
+                  <td>{{  form.influence_include(value='Y') }} </td>
+              </tr>
+            </tbody>
+          </table>
+            <p>{{ form.submit() }} </p>
+        </div>
+    </form>
+
+
+
+ {% endblock content %}

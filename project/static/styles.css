@@ -1,0 +1,68 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    }
+h3,h4 {
+    font-family: 'Roboto', sans-serif;
+    margin-left: 10%;
+    }
+li {
+    font-size: small
+    }
+p {
+    margin-left: 10%;
+    font-size: small
+}
+
+span
+    {
+    margin: 2px
+    }
+
+
+table
+{
+    margin-left: 10%;
+    border:none;
+}
+
+
+th, td {
+    padding: 10px;
+
+}
+
+input {
+  margin-left: 10%;
+}
+
+label {
+    margin-left: 10%;
+}​
+
+
+.navbar-brand
+ {color: #FFFFFF; font-family: Sansita, serif}
+
+
+.nav-list { position: relative; right: 7% }
+.wrapper {position: relative; min-height: 120%}
+
+.nav.navbar-nav.pull-right.nav-list li a {
+    color: #FFFFFF;
+}
+
+
+.color-me{
+    color:white;
+}
+
+div.settings {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+    margin-left: 10%;
+}
+div.settings label       { text-align:right; }
+div.settings label:after { content: ":"; }
+
