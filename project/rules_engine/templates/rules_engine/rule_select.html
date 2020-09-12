@@ -1,0 +1,21 @@
+
+
+{% extends "base.html" %}
+
+ {% block content %}
+    <title>View Rule List</title>
+     <div class="settings" >
+     <form method=post>
+     <label for="rule_value">Choose a rule engine </label>
+    <select name="rule_value" id="rule_value">
+    {% for item in rule_engine_list %}
+    <option value="{{ item }}">{{ item }}</option>
+    {% endfor %}
+    </select>
+
+     <button type="submit" class="button1">Generate Report</button>
+    </form>
+     </div>
+
+
+ {% endblock content %}
